@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('home');
@@ -15,9 +16,11 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'show'])
+    ->name('contact');
+
+Route::post('/contact', [ContactController::class, 'submit'])
+    ->name('contact.submit');
  
 Route::get('/register', [AuthController::class, 'showRegister'])
     ->name('register');

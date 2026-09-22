@@ -1,4 +1,4 @@
-```blade
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,34 +73,131 @@
                 </div>
 
 
-                <!-- Account -->
-                <a href="{{ route('login') }}"
-                   class="hidden md:flex flex-col text-sm hover:text-indigo-600">
+                <!-- User Account / Profile Dropdown -->
+                @guest
+                    <!-- Guest: Sign in & Register -->
+                    <div class="hidden md:flex items-center gap-3">
+                        <a href="{{ route('login') }}"
+                           class="flex flex-col text-sm text-gray-700 hover:text-indigo-600 transition">
+                            <span class="text-xs text-gray-500">Hello, Sign in</span>
+                            <span class="font-semibold">Account</span>
+                        </a>
 
-                    <span class="text-gray-500">
-                        Hello, Sign in
-                    </span>
+                        <a href="{{ route('register') }}"
+                           class="px-3.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold text-xs rounded-lg transition">
+                            Register
+                        </a>
+                    </div>
+                @else
+                    <!-- Authenticated: Profile Icon & Dropdown -->
+                    <div class="relative" id="profileDropdownWrapper">
+                        <button type="button"
+                                id="profileDropdownBtn"
+                                class="flex items-center gap-2.5 p-1.5 pr-2.5 rounded-full hover:bg-gray-100 transition border border-transparent hover:border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                aria-expanded="false"
+                                aria-haspopup="true">
 
-                    <span class="font-semibold">
-                        Account
-                    </span>
+                            <!-- Avatar Circle with Initial -->
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-base shadow-sm ring-2 ring-white">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
 
-                </a>
+                            <!-- Name & Chevron -->
+                            <div class="hidden md:flex flex-col text-left">
+                                <span class="text-[11px] leading-tight text-gray-400 font-normal">Welcome,</span>
+                                <span class="text-sm font-bold text-gray-800 leading-tight flex items-center gap-1">
+                                    {{ Str::limit(auth()->user()->name, 12) }}
+                                    <svg id="profileChevron" class="w-4 h-4 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </button>
 
+                        <!-- Profile Dropdown Menu -->
+                        <div id="profileDropdownMenu"
+                             class="hidden absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 py-2 transition-all duration-150 transform opacity-0 scale-95 origin-top-right"
+                             style="box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.18);">
 
-                <!-- Orders -->
-                <a href="/dashboard"
-                   class="hidden md:flex flex-col text-sm hover:text-indigo-600">
+                            <!-- User Info Header -->
+                            <div class="px-4 py-3 border-b border-gray-100 bg-gradient-to-br from-indigo-50/80 to-purple-50/60 rounded-t-xl">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-sm ring-2 ring-white">
+                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-bold text-gray-900 truncate">
+                                            {{ auth()->user()->name }}
+                                        </p>
+                                        <p class="text-xs text-gray-500 truncate">
+                                            {{ auth()->user()->email }}
+                                        </p>
+                                        <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-700 rounded-full">
+                                            {{ ucfirst(auth()->user()->role ?? 'Customer') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <span class="text-gray-500">
-                        Your
-                    </span>
+                            <!-- Prominent Dashboard Link -->
+                            <div class="p-2 border-b border-gray-100">
+                                <a href="{{ url('/dashboard') }}"
+                                   class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-sm hover:shadow-md hover:from-indigo-700 hover:to-purple-700 transition">
+                                    <span class="flex items-center gap-2">
+                                        <span>📊</span>
+                                        <span>Go to Dashboard</span>
+                                    </span>
+                                    <span>&rarr;</span>
+                                </a>
+                            </div>
 
-                    <span class="font-semibold">
-                        Orders
-                    </span>
+                            <!-- Dropdown Navigation Links -->
+                            <div class="py-1">
+                                <!-- My Account -->
+                                <a href="{{ url('/dashboard#account') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50/70 hover:text-indigo-600 transition font-medium">
+                                    <span class="text-base text-gray-400">👤</span>
+                                    <span>My Account</span>
+                                </a>
 
-                </a>
+                                <!-- Recent Orders -->
+                                <a href="{{ url('/dashboard#orders') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50/70 hover:text-indigo-600 transition font-medium">
+                                    <span class="text-base text-gray-400">📦</span>
+                                    <span>Recent Orders</span>
+                                </a>
+
+                                <!-- Order History -->
+                                <a href="{{ url('/dashboard#history') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50/70 hover:text-indigo-600 transition font-medium">
+                                    <span class="text-base text-gray-400">📜</span>
+                                    <span>Order History</span>
+                                </a>
+
+                                <!-- Profile Settings -->
+                                <a href="{{ url('/dashboard#settings') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50/70 hover:text-indigo-600 transition font-medium">
+                                    <span class="text-base text-gray-400">⚙️</span>
+                                    <span>Profile Settings</span>
+                                </a>
+                            </div>
+
+                            <!-- Logout Form -->
+                            <div class="border-t border-gray-100 pt-1">
+                                <form action="/logout" method="POST" class="m-0">
+                                    @csrf
+                                    <button type="submit"
+                                            class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-medium transition text-left">
+                                        <span class="text-base">🚪</span>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                @endguest
+
 
 
                 <!-- Cart -->
@@ -172,10 +269,17 @@
                         Contact
                     </a>
 
-                    <a href="{{ route('register') }}"
-                       class="hover:text-indigo-300">
-                        Join ShopSphere
-                    </a>
+                    @guest
+                        <a href="{{ route('register') }}"
+                           class="hover:text-indigo-300">
+                            Join ShopSphere
+                        </a>
+                    @else
+                        <a href="{{ url('/dashboard') }}"
+                           class="text-indigo-300 hover:text-white font-semibold flex items-center gap-1">
+                            📊 Dashboard
+                        </a>
+                    @endguest
 
                 </div>
 
@@ -184,6 +288,25 @@
         </div>
 
     </header>
+
+
+    <!-- Flash Messages (Success / Alert) -->
+    @if(session('success'))
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 pt-4">
+            <div id="flashSuccessAlert"
+                 class="flex items-center justify-between bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3.5 rounded-xl shadow-lg transition-all duration-300">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">🎉</span>
+                    <span class="font-semibold text-sm md:text-base">{{ session('success') }}</span>
+                </div>
+                <button type="button"
+                        onclick="document.getElementById('flashSuccessAlert').remove()"
+                        class="text-white/80 hover:text-white text-xl font-bold p-1 focus:outline-none">
+                    &times;
+                </button>
+            </div>
+        </div>
+    @endif
 
 
 
@@ -1168,6 +1291,76 @@
     </footer>
 
 
+    <!-- Profile Dropdown & UI Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('profileDropdownBtn');
+            const menu = document.getElementById('profileDropdownMenu');
+            const chevron = document.getElementById('profileChevron');
+            const wrapper = document.getElementById('profileDropdownWrapper');
+
+            if (btn && menu) {
+                function openMenu() {
+                    menu.classList.remove('hidden');
+                    // Small timeout for smooth animation
+                    requestAnimationFrame(() => {
+                        menu.classList.remove('opacity-0', 'scale-95');
+                        menu.classList.add('opacity-100', 'scale-100');
+                    });
+                    if (chevron) chevron.classList.add('rotate-180');
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+
+                function closeMenu() {
+                    menu.classList.remove('opacity-100', 'scale-100');
+                    menu.classList.add('opacity-0', 'scale-95');
+                    if (chevron) chevron.classList.remove('rotate-180');
+                    btn.setAttribute('aria-expanded', 'false');
+                    setTimeout(() => {
+                        if (btn.getAttribute('aria-expanded') === 'false') {
+                            menu.classList.add('hidden');
+                        }
+                    }, 150);
+                }
+
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                    if (isExpanded) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+
+                // Close on click outside
+                document.addEventListener('click', function (e) {
+                    if (wrapper && !wrapper.contains(e.target)) {
+                        closeMenu();
+                    }
+                });
+
+                // Close on ESC key
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape') {
+                        closeMenu();
+                    }
+                });
+            }
+
+            // Auto-dismiss flash banner after 7 seconds
+            const flash = document.getElementById('flashSuccessAlert');
+            if (flash) {
+                setTimeout(() => {
+                    flash.style.opacity = '0';
+                    flash.style.transform = 'translateY(-10px)';
+                    setTimeout(() => flash.remove(), 300);
+                }, 7000);
+            }
+        });
+    </script>
+
 </body>
 </html>
-```
+
+

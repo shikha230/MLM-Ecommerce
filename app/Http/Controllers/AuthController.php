@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,10 +51,10 @@ class AuthController
 
         $request->session()->regenerate();
 
-        return redirect('/dashboard')
+        return redirect()->route('home')
             ->with(
                 'success',
-                'Registration successful! Welcome to ShopSphere.'
+                'Registration successful! Welcome to ShopSphere, ' . $user->name . ' 🎉'
             );
     }
 
