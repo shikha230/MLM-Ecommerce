@@ -1,3 +1,4 @@
+```blade
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,165 +6,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopSphere</title>
+    <title>ShopSphere - Online Shopping</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-
-    <!-- Navbar -->
-    <nav class="bg-white shadow-sm">
-        
-        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-
-            <a href="/" class="text-2xl font-bold text-violet-600">
-                ShopSphere
-            </a>
-
-            <div class="hidden items-center gap-8 md:flex">
-
-                <a href="/" class="font-medium text-violet-600">
-                    Home
-                </a>
-
-                <a href="#products"
-                   class="font-medium text-gray-600 hover:text-violet-600">
-                    Products
-                </a>
-
-                <a href="#about"
-                   class="font-medium text-gray-600 hover:text-violet-600">
-                    About Us
-                </a>
-
-                <a href="#contact"
-                   class="font-medium text-gray-600 hover:text-violet-600">
-                    Contact
-                </a>
-
-                <a href="/login"
-                   class="font-semibold text-violet-600">
-                    Login
-                </a>
-
-                <a href="/register"
-                   class="rounded-lg bg-violet-600 px-5 py-2.5 font-semibold text-white hover:bg-violet-700">
-                    Register
-                </a>
-
-            </div>
-
-            <button
-                id="menuButton"
-                class="text-2xl md:hidden">
-                ☰
-            </button>
-
-        </div>
-
-        <!-- Mobile Menu -->
-
-        <div id="mobileMenu" class="hidden border-t md:hidden">
-
-            <div class="flex flex-col gap-4 px-6 py-5">
-
-                <a href="/">Home</a>
-
-                <a href="#products">Products</a>
-
-                <a href="#about">About Us</a>
-
-                <a href="#contact">Contact</a>
-
-                <a href="/login"
-                   class="font-semibold text-violet-600">
-                    Login
-                </a>
-
-                <a href="/register"
-                   class="rounded-lg bg-violet-600 px-5 py-2.5 text-center font-semibold text-white">
-                    Register
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
+<body class="bg-gray-100 text-gray-800">
 
 
-    <!-- Hero -->
+    <!-- =========================================================
+         TOP NAVBAR
+    ========================================================== -->
 
-    <section class="bg-gradient-to-br from-violet-50 via-white to-indigo-50">
+    <header class="bg-white shadow-sm">
 
-        <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 md:grid-cols-2">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6">
 
-            <div>
+            <div class="h-20 flex items-center gap-4">
 
-                <span class="inline-block rounded-full bg-violet-100 px-4 py-2 text-sm font-semibold text-violet-700">
-                    Smart Shopping. Better Rewards.
-                </span>
 
-                <h1 class="mt-6 text-5xl font-extrabold leading-tight text-gray-900 md:text-6xl">
+                <!-- Logo -->
+                <a href="{{ route('home') }}"
+                   class="shrink-0">
 
-                    Shop Smart.
-                    
-                    <span class="block text-violet-600">
-                        Earn More.
+                    <span class="text-2xl md:text-3xl font-extrabold text-indigo-600">
+                        ShopSphere
                     </span>
 
-                </h1>
+                </a>
 
-                <p class="mt-6 max-w-xl text-lg leading-8 text-gray-600">
-                    Discover quality products from trusted sellers
-                    and enjoy a smarter shopping experience with
-                    exciting referral rewards.
-                </p>
 
-                <div class="mt-8 flex flex-wrap gap-4">
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-3xl">
 
-                    <a href="#products"
-                       class="rounded-lg bg-violet-600 px-6 py-3 font-semibold text-white shadow-lg hover:bg-violet-700">
-                        Explore Products →
-                    </a>
+                    <form action="{{ route('products') }}" method="GET">
 
-                    <a href="#about"
-                       class="rounded-lg border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 hover:border-violet-600 hover:text-violet-600">
-                        Learn More
-                    </a>
+                        <div class="flex">
 
-                </div>
+                            <input
+                                type="text"
+                                name="search"
+                                placeholder="Search products..."
+                                class="w-full h-12 px-5 border border-gray-300
+                                       rounded-l-lg
+                                       focus:outline-none
+                                       focus:border-indigo-500
+                                       focus:ring-2
+                                       focus:ring-indigo-200"
+                            >
 
-                <div class="mt-10 flex gap-10">
+                            <button
+                                type="submit"
+                                class="h-12 px-6 bg-indigo-600
+                                       text-white
+                                       rounded-r-lg
+                                       hover:bg-indigo-700
+                                       transition"
+                            >
+                                🔍
+                            </button>
 
-                    <div>
-                        <h3 class="text-2xl font-bold">10K+</h3>
-                        <p class="text-sm text-gray-500">Products</p>
-                    </div>
+                        </div>
 
-                    <div>
-                        <h3 class="text-2xl font-bold">5K+</h3>
-                        <p class="text-sm text-gray-500">Customers</p>
-                    </div>
-
-                    <div>
-                        <h3 class="text-2xl font-bold">500+</h3>
-                        <p class="text-sm text-gray-500">Sellers</p>
-                    </div>
+                    </form>
 
                 </div>
+
+
+                <!-- Account -->
+                <a href="{{ route('login') }}"
+                   class="hidden md:flex flex-col text-sm hover:text-indigo-600">
+
+                    <span class="text-gray-500">
+                        Hello, Sign in
+                    </span>
+
+                    <span class="font-semibold">
+                        Account
+                    </span>
+
+                </a>
+
+
+                <!-- Orders -->
+                <a href="/dashboard"
+                   class="hidden md:flex flex-col text-sm hover:text-indigo-600">
+
+                    <span class="text-gray-500">
+                        Your
+                    </span>
+
+                    <span class="font-semibold">
+                        Orders
+                    </span>
+
+                </a>
+
+
+                <!-- Cart -->
+                <a href="#"
+                   class="relative flex items-center gap-1
+                          text-gray-700
+                          hover:text-indigo-600
+                          font-semibold">
+
+                    <span class="text-3xl">
+                        🛒
+                    </span>
+
+                    <span class="hidden sm:inline">
+                        Cart
+                    </span>
+
+                    <!-- Cart Count -->
+                    <span
+                        class="absolute -top-2 -right-2
+                               bg-red-500
+                               text-white
+                               text-xs
+                               font-bold
+                               w-5
+                               h-5
+                               rounded-full
+                               flex
+                               items-center
+                               justify-center"
+                    >
+                        0
+                    </span>
+
+                </a>
 
             </div>
 
+        </div>
 
-            <div class="flex justify-center">
 
-                <div class="flex h-[420px] w-[420px] items-center justify-center rounded-[40px] bg-violet-100">
+        <!-- =====================================================
+             SECONDARY NAVBAR
+        ====================================================== -->
 
-                    <div class="flex h-56 w-56 items-center justify-center rounded-full bg-white text-8xl shadow-xl">
-                        🛒
-                    </div>
+        <div class="bg-gray-900 text-white">
+
+            <div class="max-w-7xl mx-auto px-4 lg:px-6">
+
+                <div class="h-12 flex items-center gap-8 text-sm">
+
+                    <a href="{{ route('home') }}"
+                       class="font-semibold hover:text-indigo-300">
+                        Home
+                    </a>
+
+                    <a href="{{ route('products') }}"
+                       class="hover:text-indigo-300">
+                        Products
+                    </a>
+
+                    <a href="{{ route('about') }}"
+                       class="hover:text-indigo-300">
+                        About Us
+                    </a>
+
+                    <a href="{{ route('contact') }}"
+                       class="hover:text-indigo-300">
+                        Contact
+                    </a>
+
+                    <a href="{{ route('register') }}"
+                       class="hover:text-indigo-300">
+                        Join ShopSphere
+                    </a>
 
                 </div>
 
@@ -171,60 +183,96 @@
 
         </div>
 
-    </section>
+    </header>
 
 
-    <!-- Categories -->
 
-    <section class="px-6 py-20">
+    <!-- =========================================================
+         HERO SECTION
+    ========================================================== -->
 
-        <div class="mx-auto max-w-7xl">
+    <section class="bg-gradient-to-r from-indigo-600 to-purple-600">
 
-            <div class="mb-12 text-center">
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
 
-                <span class="text-sm font-bold tracking-widest text-violet-600">
-                    EXPLORE
-                </span>
-
-                <h2 class="mt-2 text-4xl font-bold text-gray-900">
-                    Shop by Category
-                </h2>
-
-                <p class="mt-3 text-gray-500">
-                    Find everything you need in one place.
-                </p>
-
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
 
-            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+                <!-- Hero Text -->
+                <div class="text-white">
 
-                @foreach([
-                    ['👕', 'Fashion'],
-                    ['📱', 'Electronics'],
-                    ['🏠', 'Home & Living'],
-                    ['💄', 'Beauty'],
-                    ['🎒', 'Accessories'],
-                    ['⚽', 'Sports']
-                ] as $category)
+                    <p class="uppercase tracking-widest text-indigo-200
+                              font-semibold text-sm">
+                        Welcome to ShopSphere
+                    </p>
 
-                    <div class="rounded-2xl border border-gray-200 p-6 text-center transition hover:-translate-y-1 hover:shadow-lg">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mt-4 leading-tight">
+                        Everything You Need,
+                        <span class="text-indigo-200">
+                            All in One Place
+                        </span>
+                    </h1>
 
-                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-violet-50 text-3xl">
-                            {{ $category[0] }}
+                    <p class="mt-6 text-lg text-indigo-100 max-w-xl">
+                        Discover quality products from trusted sellers,
+                        enjoy convenient shopping and become part of the
+                        ShopSphere community.
+                    </p>
+
+                    <div class="mt-8 flex flex-wrap gap-4">
+
+                        <a href="{{ route('products') }}"
+                           class="bg-white text-indigo-600
+                                  px-7 py-3
+                                  rounded-lg
+                                  font-bold
+                                  hover:bg-gray-100
+                                  transition">
+                            Shop Now
+                        </a>
+
+                        <a href="{{ route('register') }}"
+                           class="border border-white
+                                  text-white
+                                  px-7 py-3
+                                  rounded-lg
+                                  font-bold
+                                  hover:bg-white
+                                  hover:text-indigo-600
+                                  transition">
+                            Create Account
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Hero Visual -->
+                <div class="hidden lg:flex justify-center">
+
+                    <div class="w-full max-w-md
+                                bg-white/10
+                                backdrop-blur-sm
+                                rounded-3xl
+                                p-10
+                                text-center">
+
+                        <div class="text-8xl">
+                            🛍️
                         </div>
 
-                        <h3 class="mt-4 font-bold">
-                            {{ $category[1] }}
-                        </h3>
+                        <h2 class="text-3xl font-bold text-white mt-6">
+                            Shop Smart
+                        </h2>
 
-                        <p class="mt-1 text-xs text-gray-500">
-                            Explore products
+                        <p class="text-indigo-100 mt-3">
+                            Find products you love at great prices.
                         </p>
 
                     </div>
 
-                @endforeach
+                </div>
 
             </div>
 
@@ -233,80 +281,380 @@
     </section>
 
 
-    <!-- Products -->
 
-    <section id="products" class="bg-gray-50 px-6 py-20">
+    <!-- =========================================================
+         SHOP BY CATEGORY
+    ========================================================== -->
 
-        <div class="mx-auto max-w-7xl">
+    <section class="max-w-7xl mx-auto px-6 py-14">
 
-            <div class="mb-12 flex items-end justify-between">
+        <div class="flex items-center justify-between mb-8">
+
+            <div>
+
+                <p class="text-indigo-600 font-semibold text-sm uppercase">
+                    Explore
+                </p>
+
+                <h2 class="text-3xl font-bold text-gray-900 mt-1">
+                    Shop by Category
+                </h2>
+
+            </div>
+
+            <a href="{{ route('products') }}"
+               class="text-indigo-600 font-semibold hover:text-indigo-800">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+
+            <!-- Category -->
+            <a href="{{ route('products') }}"
+               class="bg-white rounded-2xl p-7 text-center
+                      shadow-sm
+                      hover:shadow-lg
+                      hover:-translate-y-1
+                      transition">
+
+                <div class="text-5xl">
+                    📱
+                </div>
+
+                <h3 class="font-bold text-lg mt-4">
+                    Electronics
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Phones, gadgets & more
+                </p>
+
+            </a>
+
+
+            <a href="{{ route('products') }}"
+               class="bg-white rounded-2xl p-7 text-center
+                      shadow-sm
+                      hover:shadow-lg
+                      hover:-translate-y-1
+                      transition">
+
+                <div class="text-5xl">
+                    👕
+                </div>
+
+                <h3 class="font-bold text-lg mt-4">
+                    Fashion
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Clothing & accessories
+                </p>
+
+            </a>
+
+
+            <a href="{{ route('products') }}"
+               class="bg-white rounded-2xl p-7 text-center
+                      shadow-sm
+                      hover:shadow-lg
+                      hover:-translate-y-1
+                      transition">
+
+                <div class="text-5xl">
+                    🏠
+                </div>
+
+                <h3 class="font-bold text-lg mt-4">
+                    Home & Living
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Make your home better
+                </p>
+
+            </a>
+
+
+            <a href="{{ route('products') }}"
+               class="bg-white rounded-2xl p-7 text-center
+                      shadow-sm
+                      hover:shadow-lg
+                      hover:-translate-y-1
+                      transition">
+
+                <div class="text-5xl">
+                    💄
+                </div>
+
+                <h3 class="font-bold text-lg mt-4">
+                    Beauty
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Beauty & personal care
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FEATURED PRODUCTS
+    ========================================================== -->
+
+    <section class="bg-white py-14">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+
+            <div class="flex items-center justify-between mb-8">
 
                 <div>
 
-                    <span class="text-sm font-bold tracking-widest text-violet-600">
-                        OUR STORE
-                    </span>
+                    <p class="text-indigo-600 font-semibold text-sm uppercase">
+                        Our Collection
+                    </p>
 
-                    <h2 class="mt-2 text-4xl font-bold">
+                    <h2 class="text-3xl font-bold text-gray-900 mt-1">
                         Featured Products
                     </h2>
 
                 </div>
 
-                <a href="#"
-                   class="font-semibold text-violet-600">
+                <a href="{{ route('products') }}"
+                   class="text-indigo-600 font-semibold hover:text-indigo-800">
                     View All →
                 </a>
 
             </div>
 
 
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                @foreach([
-                    ['👟', 'Premium Running Shoes', '₹2,499'],
-                    ['⌚', 'Smart Watch Pro', '₹1,999'],
-                    ['🎧', 'Wireless Headphones', '₹1,499'],
-                    ['🎒', 'Travel Backpack', '₹999']
-                ] as $product)
 
-                    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white transition hover:-translate-y-1 hover:shadow-xl">
+                <!-- Product 1 -->
+                <div class="bg-gray-50 rounded-2xl overflow-hidden
+                            hover:shadow-lg transition">
 
-                        <div class="flex h-52 items-center justify-center bg-gray-100 text-7xl">
-                            {{ $product[0] }}
+                    <div class="h-56 bg-gray-100
+                                flex items-center justify-center">
+
+                        <span class="text-7xl">
+                            📱
+                        </span>
+
+                    </div>
+
+                    <div class="p-5">
+
+                        <p class="text-sm text-indigo-600 font-medium">
+                            Electronics
+                        </p>
+
+                        <h3 class="font-bold text-lg mt-1">
+                            Smart Mobile Phone
+                        </h3>
+
+                        <div class="flex items-center gap-1 mt-2">
+                            <span class="text-yellow-500">
+                                ★★★★★
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                (120)
+                            </span>
                         </div>
 
-                        <div class="p-5">
+                        <div class="flex items-center justify-between mt-4">
 
-                            <span class="text-xs font-semibold text-violet-600">
-                                Featured Product
+                            <span class="text-xl font-bold">
+                                ₹14,999
                             </span>
 
-                            <h3 class="mt-2 font-bold">
-                                {{ $product[1] }}
-                            </h3>
-
-                            <div class="mt-2 text-sm text-yellow-500">
-                                ★★★★★
-                            </div>
-
-                            <div class="mt-3 flex items-center justify-between">
-
-                                <strong class="text-xl">
-                                    {{ $product[2] }}
-                                </strong>
-
-                                <button class="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-600">
-                                    Add Cart
-                                </button>
-
-                            </div>
+                            <button
+                                class="bg-indigo-600
+                                       text-white
+                                       px-4 py-2
+                                       rounded-lg
+                                       hover:bg-indigo-700">
+                                Add
+                            </button>
 
                         </div>
 
                     </div>
 
-                @endforeach
+                </div>
+
+
+                <!-- Product 2 -->
+                <div class="bg-gray-50 rounded-2xl overflow-hidden
+                            hover:shadow-lg transition">
+
+                    <div class="h-56 bg-gray-100
+                                flex items-center justify-center">
+
+                        <span class="text-7xl">
+                            👟
+                        </span>
+
+                    </div>
+
+                    <div class="p-5">
+
+                        <p class="text-sm text-indigo-600 font-medium">
+                            Fashion
+                        </p>
+
+                        <h3 class="font-bold text-lg mt-1">
+                            Running Shoes
+                        </h3>
+
+                        <div class="flex items-center gap-1 mt-2">
+                            <span class="text-yellow-500">
+                                ★★★★★
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                (86)
+                            </span>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <span class="text-xl font-bold">
+                                ₹1,999
+                            </span>
+
+                            <button
+                                class="bg-indigo-600
+                                       text-white
+                                       px-4 py-2
+                                       rounded-lg
+                                       hover:bg-indigo-700">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product 3 -->
+                <div class="bg-gray-50 rounded-2xl overflow-hidden
+                            hover:shadow-lg transition">
+
+                    <div class="h-56 bg-gray-100
+                                flex items-center justify-center">
+
+                        <span class="text-7xl">
+                            🎧
+                        </span>
+
+                    </div>
+
+                    <div class="p-5">
+
+                        <p class="text-sm text-indigo-600 font-medium">
+                            Electronics
+                        </p>
+
+                        <h3 class="font-bold text-lg mt-1">
+                            Wireless Headphones
+                        </h3>
+
+                        <div class="flex items-center gap-1 mt-2">
+                            <span class="text-yellow-500">
+                                ★★★★★
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                (64)
+                            </span>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <span class="text-xl font-bold">
+                                ₹2,499
+                            </span>
+
+                            <button
+                                class="bg-indigo-600
+                                       text-white
+                                       px-4 py-2
+                                       rounded-lg
+                                       hover:bg-indigo-700">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product 4 -->
+                <div class="bg-gray-50 rounded-2xl overflow-hidden
+                            hover:shadow-lg transition">
+
+                    <div class="h-56 bg-gray-100
+                                flex items-center justify-center">
+
+                        <span class="text-7xl">
+                            ⌚
+                        </span>
+
+                    </div>
+
+                    <div class="p-5">
+
+                        <p class="text-sm text-indigo-600 font-medium">
+                            Electronics
+                        </p>
+
+                        <h3 class="font-bold text-lg mt-1">
+                            Smart Watch
+                        </h3>
+
+                        <div class="flex items-center gap-1 mt-2">
+                            <span class="text-yellow-500">
+                                ★★★★★
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                (92)
+                            </span>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-4">
+
+                            <span class="text-xl font-bold">
+                                ₹3,499
+                            </span>
+
+                            <button
+                                class="bg-indigo-600
+                                       text-white
+                                       px-4 py-2
+                                       rounded-lg
+                                       hover:bg-indigo-700">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -315,70 +663,234 @@
     </section>
 
 
-    <!-- Referral / MLM -->
 
-    <section id="about" class="bg-gray-900 px-6 py-20 text-white">
+    <!-- =========================================================
+         POPULAR PRODUCTS
+    ========================================================== -->
 
-        <div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-center">
+    <section class="max-w-7xl mx-auto px-6 py-14">
 
-            <div>
+        <div class="mb-8">
 
-                <span class="text-sm font-bold tracking-widest text-violet-400">
-                    REFER & EARN
-                </span>
+            <p class="text-indigo-600 font-semibold text-sm uppercase">
+                Popular
+            </p>
 
-                <h2 class="mt-3 text-4xl font-bold">
-                    Shop, Refer &
-                    <span class="text-violet-400">
-                        Earn Rewards
-                    </span>
-                </h2>
+            <h2 class="text-3xl font-bold text-gray-900 mt-1">
+                Popular Products
+            </h2>
 
-                <p class="mt-5 leading-8 text-gray-400">
-                    Invite your friends and family to join our platform.
-                    Eligible purchases through your referral network
-                    can generate rewards according to the platform's
-                    referral program.
-                </p>
+        </div>
 
-                <a href="/register"
-                   class="mt-7 inline-block rounded-lg bg-violet-600 px-6 py-3 font-semibold hover:bg-violet-700">
-                    Join Now →
-                </a>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm
+                        flex items-center gap-5">
+
+                <div class="w-24 h-24 rounded-xl bg-gray-100
+                            flex items-center justify-center
+                            text-5xl">
+                    💻
+                </div>
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        Electronics
+                    </p>
+
+                    <h3 class="font-bold text-lg">
+                        Laptop
+                    </h3>
+
+                    <p class="font-bold text-indigo-600 mt-2">
+                        ₹49,999
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-6 shadow-sm
+                        flex items-center gap-5">
 
-                @foreach([
-                    ['01', 'Create Account', 'Register your account.'],
-                    ['02', 'Share Referral', 'Invite friends using your referral link.'],
-                    ['03', 'Build Network', 'Your referral network grows automatically.'],
-                    ['04', 'Earn Rewards', 'Eligible purchases can generate rewards.']
-                ] as $step)
+                <div class="w-24 h-24 rounded-xl bg-gray-100
+                            flex items-center justify-center
+                            text-5xl">
+                    🎒
+                </div>
 
-                    <div class="flex items-center gap-5 rounded-xl border border-gray-700 p-5">
+                <div>
 
-                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-violet-600 font-bold">
-                            {{ $step[0] }}
-                        </div>
+                    <p class="text-sm text-gray-500">
+                        Fashion
+                    </p>
 
-                        <div>
+                    <h3 class="font-bold text-lg">
+                        Travel Backpack
+                    </h3>
 
-                            <h3 class="font-bold">
-                                {{ $step[1] }}
+                    <p class="font-bold text-indigo-600 mt-2">
+                        ₹1,299
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm
+                        flex items-center gap-5">
+
+                <div class="w-24 h-24 rounded-xl bg-gray-100
+                            flex items-center justify-center
+                            text-5xl">
+                    🪑
+                </div>
+
+                <div>
+
+                    <p class="text-sm text-gray-500">
+                        Home
+                    </p>
+
+                    <h3 class="font-bold text-lg">
+                        Modern Chair
+                    </h3>
+
+                    <p class="font-bold text-indigo-600 mt-2">
+                        ₹4,999
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         REFERRAL / MLM SECTION
+    ========================================================== -->
+
+    <section class="bg-indigo-600 py-16">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+
+
+                <div class="text-white">
+
+                    <p class="text-indigo-200 uppercase
+                              tracking-widest font-semibold text-sm">
+                        ShopSphere Community
+                    </p>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                        Invite Friends & Grow Together
+                    </h2>
+
+                    <p class="text-indigo-100 mt-5 leading-7">
+                        Join the ShopSphere referral community.
+                        Share your referral link with friends and
+                        participate in eligible referral benefits.
+                    </p>
+
+                    <a href="{{ route('register') }}"
+                       class="inline-block mt-7
+                              bg-white
+                              text-indigo-600
+                              px-7 py-3
+                              rounded-lg
+                              font-bold
+                              hover:bg-gray-100">
+                        Join Now
+                    </a>
+
+                </div>
+
+
+                <div class="bg-white/10 rounded-3xl p-8 text-white">
+
+                    <div class="grid grid-cols-2 gap-6">
+
+                        <div class="bg-white/10 rounded-xl p-5">
+
+                            <div class="text-3xl">
+                                🔗
+                            </div>
+
+                            <h3 class="font-bold mt-3">
+                                Referral Link
                             </h3>
 
-                            <p class="text-sm text-gray-400">
-                                {{ $step[2] }}
+                            <p class="text-sm text-indigo-100 mt-1">
+                                Share with friends
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white/10 rounded-xl p-5">
+
+                            <div class="text-3xl">
+                                👥
+                            </div>
+
+                            <h3 class="font-bold mt-3">
+                                Community
+                            </h3>
+
+                            <p class="text-sm text-indigo-100 mt-1">
+                                Build your network
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white/10 rounded-xl p-5">
+
+                            <div class="text-3xl">
+                                💰
+                            </div>
+
+                            <h3 class="font-bold mt-3">
+                                Benefits
+                            </h3>
+
+                            <p class="text-sm text-indigo-100 mt-1">
+                                Eligible rewards
+                            </p>
+
+                        </div>
+
+
+                        <div class="bg-white/10 rounded-xl p-5">
+
+                            <div class="text-3xl">
+                                📈
+                            </div>
+
+                            <h3 class="font-bold mt-3">
+                                Grow
+                            </h3>
+
+                            <p class="text-sm text-indigo-100 mt-1">
+                                Grow together
                             </p>
 
                         </div>
 
                     </div>
 
-                @endforeach
+                </div>
 
             </div>
 
@@ -387,176 +899,275 @@
     </section>
 
 
-    <!-- Why Choose Us -->
 
-    <section class="px-6 py-20">
+    <!-- =========================================================
+         WHY SHOP WITH US
+    ========================================================== -->
 
-        <div class="mx-auto max-w-7xl">
+    <section class="bg-white py-16">
 
-            <div class="mb-12 text-center">
+        <div class="max-w-7xl mx-auto px-6">
 
-                <span class="text-sm font-bold tracking-widest text-violet-600">
-                    WHY CHOOSE US
-                </span>
+            <div class="text-center mb-12">
 
-                <h2 class="mt-2 text-4xl font-bold">
-                    Everything You Need
+                <p class="text-indigo-600 uppercase
+                          tracking-widest
+                          font-semibold text-sm">
+                    Shop With Confidence
+                </p>
+
+                <h2 class="text-3xl font-bold text-gray-900 mt-2">
+                    Why Shop With Us?
                 </h2>
 
             </div>
 
 
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-                @foreach([
-                    ['🔒', 'Secure Payments', 'Secure payment processing for your orders.'],
-                    ['🚚', 'Easy Shopping', 'Browse, cart and checkout with ease.'],
-                    ['💳', 'UPI Payments', 'Convenient digital payment options.'],
-                    ['⭐', 'Customer Reviews', 'Read product reviews before purchasing.']
-                ] as $feature)
 
-                    <div class="rounded-2xl border border-gray-200 p-7 text-center">
+                <div class="text-center">
 
-                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-violet-50 text-3xl">
-                            {{ $feature[0] }}
-                        </div>
+                    <div class="text-5xl">
+                        🛍️
+                    </div>
 
-                        <h3 class="mt-5 font-bold">
-                            {{ $feature[1] }}
-                        </h3>
+                    <h3 class="font-bold text-lg mt-4">
+                        Wide Selection
+                    </h3>
 
-                        <p class="mt-3 text-sm leading-6 text-gray-500">
-                            {{ $feature[2] }}
+                    <p class="text-gray-500 mt-2 text-sm">
+                        Discover products across multiple categories.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-5xl">
+                        🔒
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-4">
+                        Secure Shopping
+                    </h3>
+
+                    <p class="text-gray-500 mt-2 text-sm">
+                        Shop with confidence on our platform.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-5xl">
+                        🚚
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-4">
+                        Easy Ordering
+                    </h3>
+
+                    <p class="text-gray-500 mt-2 text-sm">
+                        Simple product discovery and ordering experience.
+                    </p>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <div class="text-5xl">
+                        🤝
+                    </div>
+
+                    <h3 class="font-bold text-lg mt-4">
+                        Trusted Community
+                    </h3>
+
+                    <p class="text-gray-500 mt-2 text-sm">
+                        Connect with sellers and our growing community.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         NEWSLETTER / CTA
+    ========================================================== -->
+
+    <section class="bg-gray-900 py-14">
+
+        <div class="max-w-4xl mx-auto px-6 text-center">
+
+            <h2 class="text-3xl font-bold text-white">
+                Ready to Start Shopping?
+            </h2>
+
+            <p class="text-gray-400 mt-3">
+                Create your ShopSphere account and explore our marketplace.
+            </p>
+
+            <div class="mt-7">
+
+                <a href="{{ route('products') }}"
+                   class="inline-block
+                          bg-indigo-600
+                          text-white
+                          px-8 py-3
+                          rounded-lg
+                          font-semibold
+                          hover:bg-indigo-700">
+                    Explore Products
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="bg-black text-gray-400">
+
+        <div class="max-w-7xl mx-auto px-6 py-12">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+
+                <!-- Brand -->
+                <div>
+
+                    <h3 class="text-2xl font-bold text-white">
+                        ShopSphere
+                    </h3>
+
+                    <p class="mt-4 text-sm leading-6">
+                        Your online shopping destination for
+                        quality products and a convenient shopping experience.
+                    </p>
+
+                </div>
+
+
+                <!-- Quick Links -->
+                <div>
+
+                    <h4 class="text-white font-semibold">
+                        Quick Links
+                    </h4>
+
+                    <div class="mt-4 space-y-3 text-sm">
+
+                        <a href="{{ route('home') }}"
+                           class="block hover:text-white">
+                            Home
+                        </a>
+
+                        <a href="{{ route('products') }}"
+                           class="block hover:text-white">
+                            Products
+                        </a>
+
+                        <a href="{{ route('about') }}"
+                           class="block hover:text-white">
+                            About Us
+                        </a>
+
+                        <a href="{{ route('contact') }}"
+                           class="block hover:text-white">
+                            Contact
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Account -->
+                <div>
+
+                    <h4 class="text-white font-semibold">
+                        Account
+                    </h4>
+
+                    <div class="mt-4 space-y-3 text-sm">
+
+                        <a href="{{ route('login') }}"
+                           class="block hover:text-white">
+                            Login
+                        </a>
+
+                        <a href="{{ route('register') }}"
+                           class="block hover:text-white">
+                            Register
+                        </a>
+
+                        <a href="/dashboard"
+                           class="block hover:text-white">
+                            My Account
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Contact -->
+                <div>
+
+                    <h4 class="text-white font-semibold">
+                        Contact
+                    </h4>
+
+                    <div class="mt-4 space-y-3 text-sm">
+
+                        <p>
+                            📧 support@shopsphere.com
+                        </p>
+
+                        <p>
+                            📞 +91 98765 43210
+                        </p>
+
+                        <p>
+                            📍 India
                         </p>
 
                     </div>
 
-                @endforeach
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- Contact -->
-
-    <section id="contact" class="bg-gray-50 px-6 py-20">
-
-        <div class="mx-auto max-w-7xl">
-
-            <div class="mb-12 text-center">
-
-                <span class="text-sm font-bold tracking-widest text-violet-600">
-                    CONTACT
-                </span>
-
-                <h2 class="mt-2 text-4xl font-bold">
-                    Get In Touch
-                </h2>
-
-            </div>
-
-
-            <div class="grid gap-6 md:grid-cols-3">
-
-                <div class="rounded-2xl bg-white p-8 text-center shadow-sm">
-                    <div class="text-3xl">📧</div>
-                    <h3 class="mt-4 font-bold">Email Us</h3>
-                    <p class="mt-2 text-sm text-gray-500">
-                        support@example.com
-                    </p>
-                </div>
-
-                <div class="rounded-2xl bg-white p-8 text-center shadow-sm">
-                    <div class="text-3xl">📞</div>
-                    <h3 class="mt-4 font-bold">Call Us</h3>
-                    <p class="mt-2 text-sm text-gray-500">
-                        +91 98765 43210
-                    </p>
-                </div>
-
-                <div class="rounded-2xl bg-white p-8 text-center shadow-sm">
-                    <div class="text-3xl">📍</div>
-                    <h3 class="mt-4 font-bold">Location</h3>
-                    <p class="mt-2 text-sm text-gray-500">
-                        India
-                    </p>
                 </div>
 
             </div>
 
-        </div>
 
-    </section>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center">
 
-
-    <!-- Footer -->
-
-    <footer class="bg-gray-950 px-6 py-14 text-white">
-
-        <div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
-
-            <div class="md:col-span-2">
-
-                <h2 class="text-2xl font-bold text-violet-400">
-                    ShopSphere
-                </h2>
-
-                <p class="mt-4 max-w-md text-sm leading-7 text-gray-400">
-                    Your trusted destination for smart shopping,
-                    quality products and exciting rewards.
+                <p class="text-sm">
+                    © {{ date('Y') }} ShopSphere. All rights reserved.
                 </p>
 
             </div>
-
-
-            <div>
-
-                <h3 class="font-bold">
-                    Quick Links
-                </h3>
-
-                <div class="mt-4 flex flex-col gap-3 text-sm text-gray-400">
-
-                    <a href="/">Home</a>
-                    <a href="#products">Products</a>
-                    <a href="#about">About Us</a>
-                    <a href="#contact">Contact</a>
-
-                </div>
-
-            </div>
-
-
-            <div>
-
-                <h3 class="font-bold">
-                    Account
-                </h3>
-
-                <div class="mt-4 flex flex-col gap-3 text-sm text-gray-400">
-
-                    <a href="/login">Login</a>
-                    <a href="/register">Register</a>
-                    <a href="#">My Orders</a>
-                    <a href="#">My Account</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="mx-auto mt-12 max-w-7xl border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
-
-            © {{ date('Y') }} ShopSphere. All rights reserved.
 
         </div>
 
     </footer>
 
+
 </body>
 </html>
+```
