@@ -189,8 +189,8 @@
             background: #ffffff;
         }
         .faq-item.open .faq-answer { display: block; }
-        .faq-item.open .faq-icon { transform: rotate(45deg); }
-        .faq-icon { font-size: 22px; transition: transform 0.25s; }
+        .faq-item.open .faq-icon { transform: rotate(180deg); }
+        .faq-icon { transition: transform 0.25s ease; }
 
         /* ---- Floating label badge ---- */
         .badge-new {
@@ -227,10 +227,11 @@
 
             {{-- Logo --}}
             <a href="{{ route('home') }}"
-               style="font-size:22px; font-weight:800; text-decoration:none;
-                      background:linear-gradient(135deg,#4f46e5,#7c3aed);
-                      -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
-                🛍️ ShopSphere
+               style="font-size:22px; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                <svg style="width:26px; height:26px; color:#4f46e5; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span style="background:linear-gradient(135deg,#4f46e5,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">ShopSphere</span>
             </a>
 
             {{-- Desktop Nav --}}
@@ -245,10 +246,11 @@
                         Account / Login
                     </a>
                 @else
-                    <a href="{{ url('/dashboard') }}"
-                       style="text-decoration:none; background:linear-gradient(135deg,#4f46e5,#7c3aed); color:#fff;
+                    <a href="{{ auth()->user()->role === 'seller' ? route('seller.dashboard') : url('/dashboard') }}"
+                       style="text-decoration:none; background:{{ auth()->user()->role === 'seller' ? 'linear-gradient(135deg,#f59e0b,#4f46e5)' : 'linear-gradient(135deg,#4f46e5,#7c3aed)' }}; color:#fff;
                               font-size:14px; font-weight:600; padding:9px 18px; border-radius:50px; display:inline-flex; align-items:center; gap:8px;">
-                        <span>👤 {{ Str::limit(auth()->user()->name, 12) }}</span>
+                        <span>{{ auth()->user()->role === 'seller' ? '🏪' : '👤' }}</span>
+                        <span>{{ auth()->user()->role === 'seller' ? 'Seller Central' : Str::limit(auth()->user()->name, 12) }}</span>
                     </a>
                 @endguest
             </div>
@@ -269,13 +271,16 @@
 
     <div style="position:relative; z-index:1; max-width:700px; margin:0 auto;">
         <div class="badge-new">
-            ✨ &nbsp;We respond within 24 hours
+            <svg style="width:15px; height:15px; margin-right:4px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            We respond within 24 hours
         </div>
         <h1 style="color:#ffffff; font-size:clamp(36px,5vw,58px); font-weight:800; margin:0 0 16px; line-height:1.15; letter-spacing:-1px;">
             Get in Touch With Us
         </h1>
-        <p style="color:rgba(255,255,255,0.82); font-size:18px; margin:0; line-height:1.6;">
-            Product queries, orders, payments ya kuch bhi — hum yahin hain aapke liye. 💬
+        <p style="color:rgba(255,255,255,0.85); font-size:18px; margin:0; line-height:1.6;">
+            Product inquiries, orders, payments, or any questions — we're here to help you.
         </p>
     </div>
 
@@ -288,9 +293,11 @@
     {{-- ===== ALERTS ===== --}}
     @if(session('success'))
         <div class="alert-success">
-            <span style="font-size:24px; flex-shrink:0;">✅</span>
+            <svg style="width:24px; height:24px; color:#10b981; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             <div>
-                <strong style="display:block; font-size:16px; margin-bottom:4px;">Inquiry Submit Ho Gayi!</strong>
+                <strong style="display:block; font-size:16px; margin-bottom:4px;">Inquiry Submitted!</strong>
                 {{ session('success') }}
             </div>
         </div>
@@ -298,8 +305,13 @@
 
     @if($errors->any())
         <div class="alert-error">
-            <strong style="display:block; margin-bottom:8px;">⚠️ Kuch errors hain:</strong>
-            <ul style="margin:0; padding-left:20px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <svg style="width:20px; height:20px; color:#ef4444; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <strong>Please fix the following errors:</strong>
+            </div>
+            <ul style="margin:0; padding-left:24px;">
                 @foreach($errors->all() as $error)
                     <li style="margin-bottom:4px;">{{ $error }}</li>
                 @endforeach
@@ -314,17 +326,21 @@
         <div>
 
             <h2 style="font-size:28px; font-weight:800; color:#111827; margin:0 0 10px;">
-                Hum yahin hain! 👋
+                We're Here for You!
             </h2>
             <p style="color:#6b7280; font-size:15px; line-height:1.7; margin:0 0 32px;">
-                Koi bhi sawaal ho toh jhijhak mat. Hamari team din mein 24 ghante uplabdh hai aapki madad ke liye.
+                Have any questions or need assistance? Feel free to reach out. Our support team is here to assist you 24/7.
             </p>
 
             {{-- Info Cards --}}
             <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:40px;">
 
                 <div class="info-card">
-                    <div class="info-icon" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">📧</div>
+                    <div class="info-icon" style="background:linear-gradient(135deg,#eff6ff,#dbeafe); color:#3b82f6;">
+                        <svg style="width:22px; height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
                     <div>
                         <div style="font-size:12px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Email</div>
                         <a href="mailto:support@shopsphere.com"
@@ -335,7 +351,11 @@
                 </div>
 
                 <div class="info-card">
-                    <div class="info-icon" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);">📞</div>
+                    <div class="info-icon" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5); color:#059669;">
+                        <svg style="width:22px; height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                    </div>
                     <div>
                         <div style="font-size:12px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Phone</div>
                         <a href="tel:+919876543210"
@@ -346,7 +366,12 @@
                 </div>
 
                 <div class="info-card">
-                    <div class="info-icon" style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff);">📍</div>
+                    <div class="info-icon" style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff); color:#7c3aed;">
+                        <svg style="width:22px; height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
                     <div>
                         <div style="font-size:12px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Address</div>
                         <span style="font-size:15px; font-weight:600; color:#7c3aed;">
@@ -356,7 +381,11 @@
                 </div>
 
                 <div class="info-card">
-                    <div class="info-icon" style="background:linear-gradient(135deg,#fff7ed,#fed7aa);">🕐</div>
+                    <div class="info-icon" style="background:linear-gradient(135deg,#fff7ed,#fed7aa); color:#ea580c;">
+                        <svg style="width:22px; height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
                     <div>
                         <div style="font-size:12px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Business Hours</div>
                         <span style="font-size:15px; font-weight:600; color:#ea580c;">
@@ -371,9 +400,23 @@
             <div>
                 <p style="font-size:13px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin:0 0 14px;">Follow Us</p>
                 <div style="display:flex; gap:12px;">
-                    <a href="#" style="width:44px; height:44px; background:#4f46e5; border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; transition:transform 0.2s;" title="Facebook" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">🌐</a>
-                    <a href="#" style="width:44px; height:44px; background:#ec4899; border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; transition:transform 0.2s;" title="Instagram" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">📸</a>
-                    <a href="#" style="width:44px; height:44px; background:#1d9bf0; border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; transition:transform 0.2s;" title="Twitter" onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">🐦</a>
+                    <a href="#" style="width:44px; height:44px; background:#4f46e5; border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#ffffff; transition:transform 0.2s;" title="Facebook" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <svg style="width:20px; height:20px;" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" style="width:44px; height:44px; background:linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#ffffff; transition:transform 0.2s;" title="Instagram" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <svg style="width:20px; height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"/>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke-width="2"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" style="width:44px; height:44px; background:#111827; border-radius:12px; display:flex; align-items:center; justify-content:center; text-decoration:none; color:#ffffff; transition:transform 0.2s;" title="Twitter" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <svg style="width:18px; height:18px;" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
 
@@ -390,11 +433,14 @@
         ">
 
             <div style="margin-bottom:32px;">
-                <h2 style="font-size:26px; font-weight:800; color:#111827; margin:0 0 8px;">
-                    Inquiry Bhejein 📩
+                <h2 style="font-size:26px; font-weight:800; color:#111827; margin:0 0 8px; display:flex; align-items:center; gap:10px;">
+                    <span>Send an Inquiry</span>
+                    <svg style="width:24px; height:24px; color:#4f46e5;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                 </h2>
                 <p style="font-size:14px; color:#9ca3af; margin:0;">
-                    Hum <strong style="color:#4f46e5;">24 ghante</strong> ke andar reply karenge.
+                    We usually respond within <strong style="color:#4f46e5;">24 hours</strong>.
                 </p>
             </div>
 
@@ -409,8 +455,11 @@
                 <div class="form-row-2">
 
                     <div>
-                        <label for="name" class="form-label">
-                            👤 Full Name <span style="color:#ef4444;">*</span>
+                        <label for="name" class="form-label" style="display:flex; align-items:center; gap:6px;">
+                            <svg style="width:16px; height:16px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Full Name <span style="color:#ef4444;">*</span>
                         </label>
                         <input
                             type="text"
@@ -418,14 +467,17 @@
                             name="name"
                             value="{{ old('name') }}"
                             required
-                            placeholder="Apna naam likhein"
+                            placeholder="Enter your full name"
                             class="form-input"
                         >
                     </div>
 
                     <div>
-                        <label for="email" class="form-label">
-                            📧 Email Address <span style="color:#ef4444;">*</span>
+                        <label for="email" class="form-label" style="display:flex; align-items:center; gap:6px;">
+                            <svg style="width:16px; height:16px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Email Address <span style="color:#ef4444;">*</span>
                         </label>
                         <input
                             type="email"
@@ -433,7 +485,7 @@
                             name="email"
                             value="{{ old('email') }}"
                             required
-                            placeholder="aapka@email.com"
+                            placeholder="you@example.com"
                             class="form-input"
                         >
                     </div>
@@ -444,8 +496,11 @@
                 <div class="form-row-2">
 
                     <div>
-                        <label for="phone" class="form-label">
-                            📞 Phone Number
+                        <label for="phone" class="form-label" style="display:flex; align-items:center; gap:6px;">
+                            <svg style="width:16px; height:16px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            Phone Number
                             <span style="color:#9ca3af; font-weight:400;">(optional)</span>
                         </label>
                         <input
@@ -459,18 +514,21 @@
                     </div>
 
                     <div>
-                        <label for="subject" class="form-label">
-                            📌 Subject <span style="color:#ef4444;">*</span>
+                        <label for="subject" class="form-label" style="display:flex; align-items:center; gap:6px;">
+                            <svg style="width:16px; height:16px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            Subject <span style="color:#ef4444;">*</span>
                         </label>
                         <select id="subject" name="subject" required class="form-input">
-                            <option value="" disabled {{ old('subject') ? '' : 'selected' }}>Topic choose karein</option>
-                            <option value="Product Inquiry"     {{ old('subject') == 'Product Inquiry' ? 'selected' : '' }}>🛍️ Product Inquiry</option>
-                            <option value="Order Status"        {{ old('subject') == 'Order Status' ? 'selected' : '' }}>📦 Order Status</option>
-                            <option value="Payment Issue"       {{ old('subject') == 'Payment Issue' ? 'selected' : '' }}>💳 Payment Issue</option>
-                            <option value="Return & Refund"     {{ old('subject') == 'Return & Refund' ? 'selected' : '' }}>↩️ Return & Refund</option>
-                            <option value="MLM / Referral"      {{ old('subject') == 'MLM / Referral' ? 'selected' : '' }}>🤝 MLM / Referral</option>
-                            <option value="Account Support"     {{ old('subject') == 'Account Support' ? 'selected' : '' }}>👤 Account Support</option>
-                            <option value="Other"               {{ old('subject') == 'Other' ? 'selected' : '' }}>💬 Other</option>
+                            <option value="" disabled {{ old('subject') ? '' : 'selected' }}>Select a topic</option>
+                            <option value="Product Inquiry"     {{ old('subject') == 'Product Inquiry' ? 'selected' : '' }}>Product Inquiry</option>
+                            <option value="Order Status"        {{ old('subject') == 'Order Status' ? 'selected' : '' }}>Order Status</option>
+                            <option value="Payment Issue"       {{ old('subject') == 'Payment Issue' ? 'selected' : '' }}>Payment Issue</option>
+                            <option value="Return & Refund"     {{ old('subject') == 'Return & Refund' ? 'selected' : '' }}>Return & Refund</option>
+                            <option value="MLM / Referral"      {{ old('subject') == 'MLM / Referral' ? 'selected' : '' }}>MLM / Referral</option>
+                            <option value="Account Support"     {{ old('subject') == 'Account Support' ? 'selected' : '' }}>Account Support</option>
+                            <option value="Other"               {{ old('subject') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
                     </div>
 
@@ -478,15 +536,18 @@
 
                 {{-- Message --}}
                 <div>
-                    <label for="message" class="form-label">
-                        💬 Message <span style="color:#ef4444;">*</span>
+                    <label for="message" class="form-label" style="display:flex; align-items:center; gap:6px;">
+                        <svg style="width:16px; height:16px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                        Message <span style="color:#ef4444;">*</span>
                     </label>
                     <textarea
                         id="message"
                         name="message"
                         rows="6"
                         required
-                        placeholder="Apni query ya message yahan likhein..."
+                        placeholder="Type your message or inquiry here..."
                         class="form-input"
                         style="resize:vertical;"
                     >{{ old('message') }}</textarea>
@@ -494,13 +555,21 @@
                 </div>
 
                 {{-- Submit --}}
-                <button type="submit" id="submitBtn" class="btn-submit">
-                    <span id="btnText">Send Inquiry 🚀</span>
-                    <span class="spinner" id="spinner" style="display:inline-block; vertical-align:middle; margin-left:8px;"></span>
+                <button type="submit" id="submitBtn" class="btn-submit" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                    <span id="btnText" style="display:inline-flex; align-items:center; gap:8px;">
+                        <span>Send Inquiry</span>
+                        <svg style="width:18px; height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </span>
+                    <span class="spinner" id="spinner"></span>
                 </button>
 
-                <p style="text-align:center; font-size:13px; color:#9ca3af; margin:0;">
-                    🔒 Aapka data safe hai. Hum kabhi share nahi karte.
+                <p style="text-align:center; font-size:13px; color:#9ca3af; margin:0; display:flex; align-items:center; justify-content:center; gap:6px;">
+                    <svg style="width:15px; height:15px; color:#10b981;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span>Your information is safe. We never share your data.</span>
                 </p>
 
             </form>
@@ -517,10 +586,10 @@
 
         <div style="text-align:center; margin-bottom:48px;">
             <h2 style="font-size:32px; font-weight:800; color:#111827; margin:0 0 12px;">
-                Aksar Pooche Jane Wale Sawaal ❓
+                Frequently Asked Questions
             </h2>
             <p style="color:#6b7280; font-size:16px; margin:0;">
-                Frequently Asked Questions
+                Quick answers to common questions about ShopSphere
             </p>
         </div>
 
@@ -528,41 +597,49 @@
 
             <div class="faq-item" onclick="toggleFaq(this)">
                 <button class="faq-btn">
-                    Order return kaise karein?
-                    <span class="faq-icon">+</span>
+                    <span>How do I return an order?</span>
+                    <svg class="faq-icon" style="width:20px; height:20px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
                 </button>
                 <div class="faq-answer">
-                    Aap apne account mein login karke "My Orders" section mein jaakar return request raise kar sakte hain. Return pickup 2–3 business days mein ho jaata hai.
+                    Log in to your account and go to the "My Orders" section to initiate a return request. Return pickup is scheduled within 2–3 business days.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFaq(this)">
                 <button class="faq-btn">
-                    Payment fail ho gayi — kya karein?
-                    <span class="faq-icon">+</span>
+                    <span>My payment failed — what should I do?</span>
+                    <svg class="faq-icon" style="width:20px; height:20px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
                 </button>
                 <div class="faq-answer">
-                    Agar payment fail hui hai toh paisa 5–7 business days mein automatically refund ho jaata hai. Agar nahi aaya toh humse contact karein is form ke through.
+                    If an amount was deducted for a failed payment, it will be automatically refunded to your original payment method within 5–7 business days. If you still need help, please submit an inquiry above.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFaq(this)">
                 <button class="faq-btn">
-                    MLM referral commission kab milta hai?
-                    <span class="faq-icon">+</span>
+                    <span>When is MLM referral commission credited?</span>
+                    <svg class="faq-icon" style="width:20px; height:20px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
                 </button>
                 <div class="faq-answer">
-                    Har successful referral ke baad commission aapke dashboard wallet mein 24 ghante mein credit ho jaata hai. Withdrawal minimum ₹500 se kar sakte hain.
+                    Referral commissions are credited to your dashboard wallet within 24 hours of a confirmed qualifying purchase. You can withdraw once your balance reaches the minimum threshold of ₹500.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFaq(this)">
                 <button class="faq-btn">
-                    Reply aane mein kitna time lagta hai?
-                    <span class="faq-icon">+</span>
+                    <span>How long does it take to receive a response?</span>
+                    <svg class="faq-icon" style="width:20px; height:20px; color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
                 </button>
                 <div class="faq-answer">
-                    Hum <strong>24 ghante</strong> ke andar reply karte hain. Urgent mamlon ke liye seedha phone karein: +91 98765 43210.
+                    We typically reply within <strong>24 hours</strong>. For urgent queries, please call us directly at +91 98765 43210.
                 </div>
             </div>
 
@@ -579,9 +656,14 @@
         <div class="footer-grid">
 
             <div>
-                <div style="font-size:20px; font-weight:800; color:#ffffff; margin-bottom:12px;">🛍️ ShopSphere</div>
+                <div style="font-size:20px; font-weight:800; color:#ffffff; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                    <svg style="width:24px; height:24px; color:#6366f1;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span>ShopSphere</span>
+                </div>
                 <p style="font-size:14px; line-height:1.7; margin:0;">
-                    Aapka trusted online shopping platform. Premium products, best prices.
+                    Your trusted online shopping destination. Premium products, best prices.
                 </p>
             </div>
 
@@ -598,16 +680,32 @@
             <div>
                 <h3 style="font-size:14px; font-weight:700; color:#ffffff; text-transform:uppercase; letter-spacing:0.5px; margin:0 0 16px;">Support</h3>
                 <div style="font-size:14px; line-height:1.8;">
-                    <p style="margin:0 0 6px;">📧 support@shopsphere.com</p>
-                    <p style="margin:0 0 6px;">📞 +91 98765 43210</p>
-                    <p style="margin:0;">🕐 Mon–Sat: 9 AM – 7 PM IST</p>
+                    <p style="margin:0 0 8px; display:flex; align-items:center; gap:8px;">
+                        <svg style="width:16px; height:16px; color:#818cf8; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        support@shopsphere.com
+                    </p>
+                    <p style="margin:0 0 8px; display:flex; align-items:center; gap:8px;">
+                        <svg style="width:16px; height:16px; color:#34d399; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        +91 98765 43210
+                    </p>
+                    <p style="margin:0; display:flex; align-items:center; gap:8px;">
+                        <svg style="width:16px; height:16px; color:#fb923c; flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Mon–Sat: 9 AM – 7 PM IST
+                    </p>
                 </div>
             </div>
 
         </div>
 
-        <div style="border-top:1px solid #374151; padding-top:24px; text-align:center; font-size:13px;">
-            © {{ date('Y') }} ShopSphere. All rights reserved. &nbsp;|&nbsp; Made with ❤️ in India
+        <div style="border-top:1px solid #374151; padding-top:24px; text-align:center; font-size:13px; display:flex; align-items:center; justify-content:center; gap:6px;">
+            <span>© {{ date('Y') }} ShopSphere. All rights reserved.</span>
+            <span>&nbsp;|&nbsp; Crafted with care in India</span>
         </div>
 
     </div>

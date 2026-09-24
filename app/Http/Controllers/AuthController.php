@@ -14,9 +14,17 @@ class AuthController
     /**
      * Show Register Page
      */
-    public function showRegister()
+    public function showRegister(Request $request)
     {
-        return view('auth.register');
+        if (Auth::check()) {
+            if (Auth::user()->role === 'seller') {
+                return redirect()->route('seller.dashboard');
+            }
+            return redirect()->route('home');
+        }
+
+        $type = $request->query('type', 'customer');
+        return view('auth.register', compact('type'));
     }
 
     /**
@@ -47,14 +55,10 @@ class AuthController
                 : null,
         ]);
 
-        Auth::login($user);
-
-        $request->session()->regenerate();
-
-        return redirect()->route('home')
+        return redirect()->route('login')
             ->with(
                 'success',
-                'Registration successful! Welcome to ShopSphere, ' . $user->name . ' 🎉'
+                'Registration successful! Welcome to ShopSphere, ' . $user->name . '. Please sign in with your credentials.'
             );
     }
 
@@ -63,6 +67,13 @@ class AuthController
      */
     public function showLogin()
     {
+        if (Auth::check()) {
+            if (Auth::user()->role === 'seller') {
+                return redirect()->route('seller.dashboard');
+            }
+            return redirect()->route('home');
+        }
+
         return view('auth.login');
     }
 
@@ -84,7 +95,14 @@ class AuthController
         ) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            $user = Auth::user();
+            if ($user->role === 'seller') {
+                return redirect()->intended(route('seller.dashboard'))
+                    ->with('success', 'Welcome to Seller Central, ' . ($user->seller?->store_name ?? $user->name) . '!');
+            }
+
+            return redirect()->intended(route('home'))
+                ->with('success', 'Welcome back, ' . $user->name . '!');
         }
 
         return back()

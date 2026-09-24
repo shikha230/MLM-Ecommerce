@@ -54,7 +54,7 @@
                             border-right:1px solid #e5e7eb;
                         ">
                             <p style="color:#374151; font-size:15px; margin:0 0 24px; line-height:1.6;">
-                                🙋 Ek nayi customer inquiry aayi hai. Neeche details hain:
+                                🙋 A new customer inquiry has been received. Here are the details:
                             </p>
 
                             {{-- Detail Table --}}
@@ -62,7 +62,7 @@
 
                                 <tr>
                                     <td style="padding:14px 16px; background:#f9fafb; border-radius:8px 8px 0 0; border-bottom:1px solid #e5e7eb;">
-                                        <span style="font-size:12px; font-weight:600; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px;">👤 Naam</span><br>
+                                        <span style="font-size:12px; font-weight:600; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px;">👤 Name</span><br>
                                         <span style="font-size:16px; color:#111827; font-weight:600; margin-top:4px; display:block;">{{ $inquiry->name }}</span>
                                     </td>
                                 </tr>
@@ -151,7 +151,7 @@
                                 <strong style="color:#ffffff;">ShopSphere</strong> &mdash; Admin Notification System
                             </p>
                             <p style="color:#6b7280; font-size:12px; margin:0;">
-                                Yeh email automatically generate hui hai. Please reply mat kijiye is email par.
+                                This is an automated notification. Please do not reply directly to this email.
                             </p>
                         </td>
                     </tr>

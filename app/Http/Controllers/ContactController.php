@@ -45,7 +45,7 @@ class ContactController
 
         return redirect()
             ->route('contact')
-            ->with('success', '✅ Aapki inquiry successfully submit ho gayi! Hum jald hi aapse contact karenge.');
+            ->with('success', 'Your inquiry has been submitted successfully! We will get back to you shortly.');
     }
 }
 

@@ -3,197 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login - ShopSphere</title>
-
+    <title>Sign In - ShopSphere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            margin: 0;
+            color: #1e293b;
+        }
+        .auth-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #0f172a;
+            background: #fafafa;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .form-control:focus {
+            border-color: #4f46e5;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+        }
+        .form-control::placeholder {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 11px 18px;
+            background: #4f46e5;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+            font-family: inherit;
+        }
+        .btn-primary:hover {
+            background: #4338ca;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
 
-<body class="min-h-screen bg-gray-100">
+<body class="flex items-center justify-center min-h-screen py-10 px-4">
 
-    <div class="min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="w-full" style="max-width: 440px;">
 
-        <div class="w-full max-w-md">
-
-            <!-- Logo -->
-            <div class="text-center mb-8">
-
-                <a
-                    href="/"
-                    class="text-3xl font-bold text-indigo-600"
-                >
+        <!-- Brand & Heading -->
+        <div class="text-center mb-6">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-decoration-none group">
+                <span class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-lg shadow-sm">
+                    🛍️
+                </span>
+                <span class="text-2xl font-extrabold text-indigo-600 tracking-tight">
                     ShopSphere
-                </a>
+                </span>
+            </a>
 
-                <h1 class="text-2xl font-bold text-gray-900 mt-5">
-                    Welcome Back
-                </h1>
+            <h1 class="text-2xl font-extrabold text-slate-900 mt-4 mb-1">
+                Welcome back
+            </h1>
+            <p class="text-slate-500 text-xs sm:text-sm m-0">
+                Sign in to continue to your account
+            </p>
+        </div>
 
-                <p class="text-gray-500 mt-2">
-                    Login to continue to your account
-                </p>
+        <!-- Login Card -->
+        <div class="auth-card p-6 sm:p-8">
 
-            </div>
+            <!-- Flash Success Message -->
+            @if (session('success'))
+                <div class="mb-5 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
+                    <span class="text-base">✅</span>
+                    <span>{{ session('success') }}</span>
+                </div>
+            @endif
 
+            <!-- Flash Status Message (e.g. password reset) -->
+            @if (session('status'))
+                <div class="mb-5 p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs text-indigo-700 flex items-center gap-2">
+                    <span class="text-base">ℹ️</span>
+                    <span>{{ session('status') }}</span>
+                </div>
+            @endif
 
-            <!-- Login Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-8">
-
-                <!-- Success Message -->
-                @if (session('success'))
-                    <div class="mb-6 rounded-lg bg-green-50 border border-green-200 p-4">
-                        <p class="text-sm text-green-600">
-                            {{ session('success') }}
-                        </p>
+            <!-- Error Messages -->
+            @if ($errors->any())
+                <div class="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200">
+                    <div class="text-xs font-bold text-rose-800 mb-1 flex items-center gap-1.5">
+                        <span>⚠️</span> Please fix the following:
                     </div>
-                @endif
+                    <ul class="text-xs text-rose-600 m-0 pl-4 space-y-0.5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
+            <form action="{{ route('login.store') }}" method="POST">
+                @csrf
 
-                <!-- Error Messages -->
-                @if ($errors->any())
-                    <div class="mb-6 rounded-lg bg-red-50 border border-red-200 p-4">
-
-                        <ul class="text-sm text-red-600 space-y-1">
-
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-
-                        </ul>
-
-                    </div>
-                @endif
-
-
-                <form
-                    action="{{ route('login.store') }}"
-                    method="POST"
-                >
-
-                    @csrf
-
-
-                    <!-- Email -->
-                    <div class="mb-5">
-
-                        <label
-                            for="email"
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                            Email Address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="{{ old('email') }}"
-                            required
-                            autocomplete="email"
-                            placeholder="Enter your email"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                   focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
-                                   outline-none"
-                        >
-
-                    </div>
-
-
-                    <!-- Password -->
-                    <div class="mb-5">
-
-                        <label
-                            for="password"
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                            Password
-                        </label>
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            required
-                            autocomplete="current-password"
-                            placeholder="Enter your password"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                   focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
-                                   outline-none"
-                        >
-
-                    </div>
-                   <div class="flex justify-end mb-6"><a href="{{ route('password.request') }}"
-                                class="text-sm text-indigo-600 hover:text-indigo-700 font-medium">Forgot Password?
-                            </a>
-                    </div> 
-
-                    <!-- Remember Me -->
-                    <div class="flex items-center mb-6">
-
-                        <input
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                            value="1"
-                            class="w-4 h-4 text-indigo-600 border-gray-300 rounded"
-                        >
-
-                        <label
-                            for="remember"
-                            class="ml-2 text-sm text-gray-600"
-                        >
-                            Remember me
-                        </label>
-         
-                    </div>
-
-
-                    <!-- Login Button -->
-                    <button
-                        type="submit"
-                        class="w-full bg-indigo-600 hover:bg-indigo-700
-                               text-white font-semibold py-3 rounded-lg
-                               transition duration-200"
+                <!-- Email -->
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autocomplete="email"
+                        placeholder="name@example.com"
+                        class="form-control"
                     >
-                        Login
-                    </button>
-
-                </form>
-
-
-                <!-- Register Link -->
-                <div class="text-center mt-6">
-
-                    <p class="text-gray-600 text-sm">
-
-                        Don't have an account?
-
-                        <a
-                            href="{{ route('register') }}"
-                            class="text-indigo-600 hover:text-indigo-700 font-semibold"
-                        >
-                            Create Account
-                        </a>
-
-                    </p>
-
                 </div>
 
+                <!-- Password -->
+                <div class="mb-4">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label for="password" class="form-label" style="margin-bottom:0;">Password</label>
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 text-decoration-none">
+                            Forgot password?
+                        </a>
+                    </div>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        class="form-control"
+                    >
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center mb-5">
+                    <input
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                        value="1"
+                        class="accent-indigo-600 rounded"
+                        style="width: 15px; height: 15px; cursor: pointer;"
+                    >
+                    <label for="remember" class="ml-2 text-xs text-slate-600 font-medium cursor-pointer" style="margin-bottom:0;">
+                        Remember me on this device
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Register Links -->
+            <div class="text-center mt-6 pt-5 border-t border-slate-100 space-y-2">
+                <p class="text-slate-600 text-xs sm:text-sm m-0">
+                    Don't have an account?
+                    <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-700 font-semibold ml-1 text-decoration-none">
+                        Create an Account
+                    </a>
+                </p>
+                <p class="text-xs text-slate-500 m-0">
+                    Looking to sell?
+                    <a href="{{ route('register', ['type' => 'seller']) }}" class="text-purple-600 hover:text-purple-700 font-semibold ml-1 text-decoration-none">
+                        Register as Seller &rarr;
+                    </a>
+                </p>
             </div>
 
+        </div>
 
-            <!-- Back Home -->
-            <div class="text-center mt-6">
-
-                <a
-                    href="/"
-                    class="text-sm text-gray-500 hover:text-indigo-600"
-                >
-                    ← Back to Home
-                </a>
-
-            </div>
-
+        <!-- Back to Home -->
+        <div class="text-center mt-6">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-600 transition text-decoration-none">
+                <span>&larr;</span>
+                <span>Back to Home</span>
+            </a>
         </div>
 
     </div>
