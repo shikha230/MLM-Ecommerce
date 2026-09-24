@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Contact Inquiry - ShopSphere</title>
+    <title>New Contact Inquiry - FreshBasket</title>
 </head>
 <body style="margin:0; padding:0; background-color:#f0f4ff; font-family:'Segoe UI', Arial, sans-serif;">
 
@@ -41,7 +41,7 @@
                                 color:rgba(255,255,255,0.8);
                                 margin:8px 0 0;
                                 font-size:14px;
-                            ">ShopSphere Support Dashboard</p>
+                            ">FreshBasket Support Dashboard</p>
                         </td>
                     </tr>
 
@@ -148,7 +148,7 @@
                             text-align:center;
                         ">
                             <p style="color:#9ca3af; font-size:13px; margin:0 0 6px;">
-                                <strong style="color:#ffffff;">ShopSphere</strong> &mdash; Admin Notification System
+                                <strong style="color:#ffffff;">FreshBasket</strong> &mdash; Admin Notification System
                             </p>
                             <p style="color:#6b7280; font-size:12px; margin:0;">
                                 This is an automated notification. Please do not reply directly to this email.

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Seller Central') - ShopSphere</title>
+    <title>@yield('title', 'Seller Central') - FreshBasket</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,9 +30,9 @@
         }
         .sidebar-link.active {
             color: #ffffff;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: linear-gradient(135deg, #166534, #15803d);
             font-weight: 600;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 4px 14px rgba(22, 101, 52, 0.35);
         }
         .badge-pill {
             display: inline-flex;
@@ -50,7 +50,7 @@
     <!-- Mobile Header -->
     <div class="lg:hidden bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between sticky top-0 z-50 shadow-md">
         <a href="{{ route('seller.dashboard') }}" class="flex items-center gap-2 font-bold text-lg text-white">
-            <span class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-sm">🏪</span>
+            <span class="w-8 h-8 rounded-lg bg-emerald-700 flex items-center justify-center text-sm">🏪</span>
             <span>Seller Central</span>
         </a>
         <button type="button" id="mobileMenuBtn" class="p-2 rounded-lg bg-slate-800 text-gray-300 hover:text-white focus:outline-none">
@@ -66,12 +66,12 @@
         <!-- Brand Header -->
         <div class="p-6 border-b border-slate-800 flex items-center justify-between">
             <a href="{{ route('seller.dashboard') }}" class="flex items-center gap-3 text-white text-decoration-none">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-xl shadow-lg">
-                    🏪
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 to-green-600 flex items-center justify-center text-white text-xl shadow-lg">
+                    🥬
                 </div>
                 <div>
                     <span class="text-lg font-extrabold tracking-tight text-white block leading-tight">Seller Central</span>
-                    <span class="text-[11px] font-medium text-indigo-400 uppercase tracking-wider block">ShopSphere Vendor</span>
+                    <span class="text-[11px] font-medium text-emerald-400 uppercase tracking-wider block">FreshBasket Vendor</span>
                 </div>
             </a>
             <button type="button" id="closeSidebarBtn" class="lg:hidden text-gray-400 hover:text-white p-1">
@@ -141,7 +141,7 @@
             <a href="{{ route('home') }}" class="sidebar-link">
                 <span class="text-lg">🌐</span>
                 <span>Go to Website</span>
-                <span class="text-[11px] bg-indigo-500/20 text-indigo-300 font-semibold px-2 py-0.5 rounded ml-auto">Storefront &rarr;</span>
+                <span class="text-[11px] bg-emerald-500/20 text-emerald-300 font-semibold px-2 py-0.5 rounded ml-auto">Storefront &rarr;</span>
             </a>
         </nav>
 
@@ -171,12 +171,12 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 text-sm font-semibold rounded-xl border border-slate-200 transition shadow-xs">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 text-sm font-semibold rounded-xl border border-slate-200 transition shadow-xs">
                     <span class="text-base">🌐</span>
                     <span>Go to Website</span>
                 </a>
 
-                <a href="{{ route('seller.products.create') }}" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow transition">
+                <a href="{{ route('seller.products.create') }}" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow transition">
                     <span>➕</span>
                     <span>New Product</span>
                 </a>
@@ -184,7 +184,7 @@
                 <div class="w-px h-6 bg-gray-200 hidden sm:block"></div>
 
                 <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold text-sm flex items-center justify-center shadow-xs">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-700 to-teal-600 text-white font-bold text-sm flex items-center justify-center shadow-xs">
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
                     <div class="hidden md:block text-left">
@@ -239,7 +239,7 @@
 
         <!-- Footer -->
         <footer class="p-6 border-t border-gray-200 text-center text-xs text-gray-400 bg-white">
-            &copy; {{ date('Y') }} ShopSphere Seller Central. All rights reserved.
+            &copy; {{ date('Y') }} FreshBasket Vendor Central. All rights reserved.
         </footer>
     </div>
 

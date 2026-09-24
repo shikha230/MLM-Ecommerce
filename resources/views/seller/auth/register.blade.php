@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Become a Seller - ShopSphere</title>
+    <title>Become a Seller - FreshBasket</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -16,10 +16,10 @@
             font-size:15px; color:#111827; outline:none; font-family:inherit;
             background:#fafafa; box-sizing:border-box; transition:all 0.2s;
         }
-        .form-input:focus { border-color:#4f46e5; box-shadow:0 0 0 4px rgba(79,70,229,0.1); background:#fff; }
+        .form-input:focus { border-color:#16a34a; box-shadow:0 0 0 4px rgba(79,70,229,0.1); background:#fff; }
         .section-title { font-size:16px; font-weight:700; color:#111827; margin:0 0 20px; padding-bottom:10px; border-bottom:2px solid #e5e7eb; }
         .step-tab { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:50px; font-size:14px; font-weight:600; cursor:pointer; border:none; transition:all 0.2s; }
-        .step-tab.active { background:linear-gradient(135deg,#4f46e5,#7c3aed); color:#fff; box-shadow:0 4px 14px rgba(79,70,229,0.3); }
+        .step-tab.active { background:linear-gradient(135deg,#16a34a,#7c3aed); color:#fff; box-shadow:0 4px 14px rgba(79,70,229,0.3); }
         .step-tab.done { background:#ecfdf5; color:#059669; border:2px solid #6ee7b7; }
         .step-tab.inactive { background:#f3f4f6; color:#9ca3af; }
         .step-pane { display:none; }
@@ -31,16 +31,16 @@
 <!-- Top Nav -->
 <nav style="background:#fff;border-bottom:1px solid #e5e7eb;padding:0 24px;">
     <div style="max-width:1200px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;">
-        <a href="{{ route('home') }}" style="font-size:22px;font-weight:800;text-decoration:none;background:linear-gradient(135deg,#4f46e5,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
-            🛍️ ShopSphere
+        <a href="{{ route('home') }}" style="font-size:22px;font-weight:800;text-decoration:none;background:linear-gradient(135deg,#16a34a,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+            🛍️ FreshBasket
         </a>
-        <p style="font-size:14px;color:#6b7280;margin:0;">Already a seller? <a href="{{ route('seller.login') }}" style="color:#4f46e5;font-weight:600;text-decoration:none;">Sign in →</a></p>
+        <p style="font-size:14px;color:#6b7280;margin:0;">Already a seller? <a href="{{ route('seller.login') }}" style="color:#16a34a;font-weight:600;text-decoration:none;">Sign in →</a></p>
     </div>
 </nav>
 
 <!-- Hero Banner -->
-<div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:48px 24px;text-align:center;">
-    <h1 style="color:#fff;font-size:36px;font-weight:800;margin:0 0 12px;">Start Selling on ShopSphere 🚀</h1>
+<div style="background:linear-gradient(135deg,#16a34a,#7c3aed);padding:48px 24px;text-align:center;">
+    <h1 style="color:#fff;font-size:36px;font-weight:800;margin:0 0 12px;">Start Selling on FreshBasket 🚀</h1>
     <p style="color:rgba(255,255,255,0.8);font-size:16px;margin:0;">Join thousands of sellers. Setup your store in under 5 minutes.</p>
 </div>
 
@@ -111,7 +111,7 @@
                 </div>
                 <div style="text-align:right;margin-top:28px;">
                     <button type="button" onclick="goToStep(2)"
-                        style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">
+                        style="background:linear-gradient(135deg,#16a34a,#7c3aed);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">
                         Next: Store Details →
                     </button>
                 </div>
@@ -164,7 +164,7 @@
                 </div>
                 <div style="display:flex;gap:12px;justify-content:space-between;margin-top:28px;">
                     <button type="button" onclick="goToStep(1)" style="background:#f3f4f6;color:#374151;font-size:14px;font-weight:600;padding:13px 28px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">← Back</button>
-                    <button type="button" onclick="goToStep(3)" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">Next: Bank Details →</button>
+                    <button type="button" onclick="goToStep(3)" style="background:linear-gradient(135deg,#16a34a,#7c3aed);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">Next: Bank Details →</button>
                 </div>
             </div>
 
@@ -194,14 +194,14 @@
                 <!-- Agreement -->
                 <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:20px;margin-top:28px;">
                     <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:13px;color:#374151;line-height:1.6;">
-                        <input type="checkbox" id="agree" style="margin-top:3px;accent-color:#4f46e5;width:16px;height:16px;flex-shrink:0;" required>
-                        <span>I agree to ShopSphere's <strong style="color:#4f46e5;">Seller Terms & Conditions</strong>, <strong style="color:#4f46e5;">Privacy Policy</strong>, and confirm that I am legally authorized to sell the listed products in India.</span>
+                        <input type="checkbox" id="agree" style="margin-top:3px;accent-color:#16a34a;width:16px;height:16px;flex-shrink:0;" required>
+                        <span>I agree to FreshBasket's <strong style="color:#16a34a;">Seller Terms & Conditions</strong>, <strong style="color:#16a34a;">Privacy Policy</strong>, and confirm that I am legally authorized to sell the listed products in India.</span>
                     </label>
                 </div>
 
                 <div style="display:flex;gap:12px;justify-content:space-between;margin-top:24px;">
                     <button type="button" onclick="goToStep(2)" style="background:#f3f4f6;color:#374151;font-size:14px;font-weight:600;padding:13px 28px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">← Back</button>
-                    <button type="submit" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:15px;font-weight:700;padding:14px 36px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">
+                    <button type="submit" style="background:linear-gradient(135deg,#16a34a,#7c3aed);color:#fff;font-size:15px;font-weight:700;padding:14px 36px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">
                         🚀 Create My Seller Account
                     </button>
                 </div>

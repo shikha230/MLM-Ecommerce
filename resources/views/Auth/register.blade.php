@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create an Account - ShopSphere</title>
+    <title>Create an Account - FreshBasket</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -45,9 +45,9 @@
             font-family: inherit;
         }
         .form-control:focus {
-            border-color: #4f46e5;
+            border-color: #16a34a;
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+            box-shadow: 0 0 0 3px rgba(22,163,74, 0.12);
         }
         .form-control::placeholder {
             color: #94a3b8;
@@ -56,7 +56,7 @@
         .btn-primary {
             width: 100%;
             padding: 11px 18px;
-            background: #4f46e5;
+            background: #16a34a;
             color: #ffffff;
             border: none;
             border-radius: 10px;
@@ -64,12 +64,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 2px 8px rgba(22,163,74, 0.25);
             font-family: inherit;
         }
         .btn-primary:hover {
-            background: #4338ca;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            background: #15803d;
+            box-shadow: 0 4px 14px rgba(22,163,74, 0.35);
             transform: translateY(-1px);
         }
         .btn-secondary {
@@ -111,7 +111,7 @@
         }
         .toggle-btn.active {
             background: #ffffff;
-            color: #4f46e5;
+            color: #16a34a;
             box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
         .seller-step-tab {
@@ -127,8 +127,8 @@
             transition: all 0.2s;
             font-family: inherit;
         }
-        .seller-step-tab.active { background: #4f46e5; color: #fff; }
-        .seller-step-tab.done { background: #ecfdf5; color: #059669; }
+        .seller-step-tab.active { background: #16a34a; color: #fff; }
+        .seller-step-tab.done { background: #dcfce7; color: #15803d; }
         .seller-step-tab.inactive { background: #f1f5f9; color: #94a3b8; }
         .step-pane { display: none; }
         .step-pane.active { display: block; }
@@ -164,11 +164,11 @@
         <!-- Top Header & Brand -->
         <div class="text-center mb-6">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-decoration-none group">
-                <span class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-lg shadow-sm">
-                    🛍️
+                <span class="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center text-white text-lg shadow-sm">
+                    🛒
                 </span>
-                <span class="text-2xl font-extrabold text-indigo-600 tracking-tight">
-                    ShopSphere
+                <span class="text-2xl font-extrabold text-green-700 tracking-tight">
+                    FreshBasket
                 </span>
             </a>
 
@@ -176,7 +176,7 @@
                 Create your account
             </h1>
             <p class="text-slate-500 text-xs sm:text-sm m-0" id="mainSubtitle">
-                {{ $isSeller ? 'Open your store and start selling on ShopSphere' : 'Join ShopSphere and start shopping' }}
+                {{ $isSeller ? 'Open your store on FreshBasket and start selling fresh grocery' : 'Join FreshBasket and order fresh groceries daily' }}
             </p>
 
             <!-- Role Segmented Switcher -->
@@ -403,8 +403,8 @@
 
                         <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl mb-4">
                             <label class="flex items-start gap-2.5 cursor-pointer text-xs text-slate-600 m-0">
-                                <input type="checkbox" id="seller_agree" required class="mt-0.5 accent-indigo-600">
-                                <span>I agree to ShopSphere's <strong class="text-indigo-600">Merchant Terms & Conditions</strong> and confirm my store details.</span>
+                                <input type="checkbox" id="seller_agree" required class="mt-0.5 accent-emerald-600">
+                                <span>I agree to FreshBasket's <strong class="text-emerald-700">Merchant Terms & Conditions</strong> and confirm my store details.</span>
                             </label>
                         </div>
 
@@ -425,7 +425,7 @@
             <div class="text-center mt-6 pt-5 border-t border-slate-100">
                 <p class="text-slate-600 text-xs sm:text-sm m-0">
                     Already have an account?
-                    <a href="{{ route('login') }}" class="text-indigo-600 hover:text-indigo-700 font-semibold ml-1 text-decoration-none">
+                    <a href="{{ route('login') }}" class="text-green-600 hover:text-green-700 font-semibold ml-1 text-decoration-none">
                         Login here
                     </a>
                 </p>
@@ -435,7 +435,7 @@
 
         <!-- Back to Home -->
         <div class="text-center mt-6">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-600 transition text-decoration-none">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-green-600 transition text-decoration-none">
                 <span>&larr;</span>
                 <span>Back to Home</span>
             </a>
@@ -461,7 +461,7 @@
                 customerSection.classList.remove('block');
                 sellerSection.classList.remove('hidden');
                 sellerSection.classList.add('block');
-                mainSubtitle.textContent = 'Open your store and start selling on ShopSphere';
+                    mainSubtitle.textContent = 'Open your store on FreshBasket and start selling fresh grocery';
 
                 const url = new URL(window.location);
                 url.searchParams.set('type', 'seller');
@@ -474,7 +474,7 @@
                 sellerSection.classList.remove('block');
                 customerSection.classList.remove('hidden');
                 customerSection.classList.add('block');
-                mainSubtitle.textContent = 'Join ShopSphere and start shopping';
+                mainSubtitle.textContent = 'Join FreshBasket and order fresh groceries daily';
 
                 const url = new URL(window.location);
                 url.searchParams.delete('type');

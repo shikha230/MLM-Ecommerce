@@ -66,6 +66,20 @@ class Product extends Model
         if ($this->compare_at_price && $this->compare_at_price > $this->price) {
             return round((($this->compare_at_price - $this->price) / $this->compare_at_price) * 100);
         }
+
         return 0;
+    }
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (! empty($this->featured_image)) {
+            if (str_starts_with($this->featured_image, 'http://') || str_starts_with($this->featured_image, 'https://')) {
+                return $this->featured_image;
+            }
+
+            return asset('storage/'.$this->featured_image);
+        }
+
+        return null;
     }
 }

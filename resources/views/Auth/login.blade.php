@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - ShopSphere</title>
+    <title>Sign In - FreshBasket</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -11,7 +11,7 @@
         * { box-sizing: border-box; }
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
             min-height: 100vh;
             margin: 0;
             color: #1e293b;
@@ -42,9 +42,9 @@
             font-family: inherit;
         }
         .form-control:focus {
-            border-color: #4f46e5;
+            border-color: #16a34a;
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
         }
         .form-control::placeholder {
             color: #94a3b8;
@@ -53,7 +53,7 @@
         .btn-primary {
             width: 100%;
             padding: 11px 18px;
-            background: #4f46e5;
+            background: #16a34a;
             color: #ffffff;
             border: none;
             border-radius: 10px;
@@ -61,12 +61,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
             font-family: inherit;
         }
         .btn-primary:hover {
-            background: #4338ca;
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            background: #15803d;
+            box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
             transform: translateY(-1px);
         }
     </style>
@@ -79,11 +79,11 @@
         <!-- Brand & Heading -->
         <div class="text-center mb-6">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-decoration-none group">
-                <span class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-lg shadow-sm">
-                    🛍️
+                <span class="w-9 h-9 rounded-xl bg-green-600 flex items-center justify-center text-white text-lg shadow-sm">
+                    🛒
                 </span>
-                <span class="text-2xl font-extrabold text-indigo-600 tracking-tight">
-                    ShopSphere
+                <span class="text-2xl font-extrabold text-green-700 tracking-tight">
+                    FreshBasket
                 </span>
             </a>
 
@@ -91,7 +91,7 @@
                 Welcome back
             </h1>
             <p class="text-slate-500 text-xs sm:text-sm m-0">
-                Sign in to continue to your account
+                Sign in to your FreshBasket account
             </p>
         </div>
 
@@ -108,7 +108,7 @@
 
             <!-- Flash Status Message (e.g. password reset) -->
             @if (session('status'))
-                <div class="mb-5 p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs text-indigo-700 flex items-center gap-2">
+                <div class="mb-5 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
                     <span class="text-base">ℹ️</span>
                     <span>{{ session('status') }}</span>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="mb-4">
                     <div class="flex items-center justify-between mb-1.5">
                         <label for="password" class="form-label" style="margin-bottom:0;">Password</label>
-                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 text-decoration-none">
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-green-600 hover:text-green-700 text-decoration-none">
                             Forgot password?
                         </a>
                     </div>
@@ -172,7 +172,7 @@
                         id="remember"
                         name="remember"
                         value="1"
-                        class="accent-indigo-600 rounded"
+                        class="accent-green-600 rounded"
                         style="width: 15px; height: 15px; cursor: pointer;"
                     >
                     <label for="remember" class="ml-2 text-xs text-slate-600 font-medium cursor-pointer" style="margin-bottom:0;">
@@ -190,13 +190,13 @@
             <div class="text-center mt-6 pt-5 border-t border-slate-100 space-y-2">
                 <p class="text-slate-600 text-xs sm:text-sm m-0">
                     Don't have an account?
-                    <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-700 font-semibold ml-1 text-decoration-none">
+                    <a href="{{ route('register') }}" class="text-green-600 hover:text-green-700 font-semibold ml-1 text-decoration-none">
                         Create an Account
                     </a>
                 </p>
                 <p class="text-xs text-slate-500 m-0">
                     Looking to sell?
-                    <a href="{{ route('register', ['type' => 'seller']) }}" class="text-purple-600 hover:text-purple-700 font-semibold ml-1 text-decoration-none">
+                    <a href="{{ route('register', ['type' => 'seller']) }}" class="text-green-700 hover:text-green-800 font-semibold ml-1 text-decoration-none">
                         Register as Seller &rarr;
                     </a>
                 </p>
@@ -206,7 +206,7 @@
 
         <!-- Back to Home -->
         <div class="text-center mt-6">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-600 transition text-decoration-none">
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-green-600 transition text-decoration-none">
                 <span>&larr;</span>
                 <span>Back to Home</span>
             </a>

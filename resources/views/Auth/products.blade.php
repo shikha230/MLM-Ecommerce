@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Products - ShopSphere</title>
+    <title>Products - FreshBasket</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -15,35 +15,35 @@
     <nav class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-            <a href="/" class="text-2xl font-bold text-indigo-600">
-                ShopSphere
+            <a href="/" class="text-2xl font-bold text-green-600">
+                FreshBasket
             </a>
 
             <div class="hidden md:flex items-center gap-8">
 
-                <a href="/" class="text-gray-600 hover:text-indigo-600">
+                <a href="/" class="text-gray-600 hover:text-green-600">
                     Home
                 </a>
 
-                <a href="/products" class="text-indigo-600 font-semibold">
+                <a href="/products" class="text-green-600 font-semibold">
                     Products
                 </a>
 
-                <a href="/about" class="text-gray-600 hover:text-indigo-600">
+                <a href="/about" class="text-gray-600 hover:text-green-600">
                     About Us
                 </a>
 
-                <a href="/contact" class="text-gray-600 hover:text-indigo-600">
+                <a href="/contact" class="text-gray-600 hover:text-green-600">
                     Contact
                 </a>
 
                 <a href="/login"
-                   class="text-gray-600 hover:text-indigo-600">
+                   class="text-gray-600 hover:text-green-600">
                     Login
                 </a>
 
                 <a href="/register"
-                   class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700">
+                   class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700">
                     Register
                 </a>
 
@@ -54,7 +54,7 @@
 
 
     <!-- Page Header -->
-    <section class="bg-indigo-600 text-white py-16">
+    <section class="bg-green-600 text-white py-16">
 
         <div class="max-w-7xl mx-auto px-6 text-center">
 
@@ -62,7 +62,7 @@
                 Our Products
             </h1>
 
-            <p class="mt-4 text-indigo-100 max-w-2xl mx-auto">
+            <p class="mt-4 text-green-100 max-w-2xl mx-auto">
                 Explore our wide range of quality products at affordable prices.
             </p>
 
@@ -82,13 +82,13 @@
                     type="text"
                     placeholder="Search products..."
                     class="border border-gray-300 rounded-lg px-4 py-3
-                           focus:border-indigo-500 focus:ring-2
-                           focus:ring-indigo-200 outline-none"
+                           focus:border-green-500 focus:ring-2
+                           focus:ring-green-200 outline-none"
                 >
 
                 <select
                     class="border border-gray-300 rounded-lg px-4 py-3
-                           focus:border-indigo-500 outline-none"
+                           focus:border-green-500 outline-none"
                 >
                     <option>All Categories</option>
                     <option>Electronics</option>
@@ -99,7 +99,7 @@
 
                 <select
                     class="border border-gray-300 rounded-lg px-4 py-3
-                           focus:border-indigo-500 outline-none"
+                           focus:border-green-500 outline-none"
                 >
                     <option>Price Range</option>
                     <option>Under ₹500</option>
@@ -110,7 +110,7 @@
 
                 <select
                     class="border border-gray-300 rounded-lg px-4 py-3
-                           focus:border-indigo-500 outline-none"
+                           focus:border-green-500 outline-none"
                 >
                     <option>Sort By</option>
                     <option>Newest</option>
@@ -137,7 +137,7 @@
 
                 <div class="p-5">
 
-                    <p class="text-sm text-indigo-600 font-medium">
+                    <p class="text-sm text-green-600 font-medium">
                         Electronics
                     </p>
 
@@ -156,8 +156,8 @@
                         </span>
 
                         <button
-                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg
-                                   hover:bg-indigo-700"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg
+                                   hover:bg-green-700"
                         >
                             View
                         </button>
@@ -178,7 +178,7 @@
 
                 <div class="p-5">
 
-                    <p class="text-sm text-indigo-600 font-medium">
+                    <p class="text-sm text-green-600 font-medium">
                         Fashion
                     </p>
 
@@ -197,8 +197,8 @@
                         </span>
 
                         <button
-                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg
-                                   hover:bg-indigo-700"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg
+                                   hover:bg-green-700"
                         >
                             View
                         </button>
@@ -219,7 +219,7 @@
 
                 <div class="p-5">
 
-                    <p class="text-sm text-indigo-600 font-medium">
+                    <p class="text-sm text-green-600 font-medium">
                         Electronics
                     </p>
 
@@ -238,8 +238,8 @@
                         </span>
 
                         <button
-                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg
-                                   hover:bg-indigo-700"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg
+                                   hover:bg-green-700"
                         >
                             View
                         </button>
@@ -260,7 +260,7 @@
 
                 <div class="p-5">
 
-                    <p class="text-sm text-indigo-600 font-medium">
+                    <p class="text-sm text-green-600 font-medium">
                         Electronics
                     </p>
 
@@ -279,8 +279,8 @@
                         </span>
 
                         <button
-                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg
-                                   hover:bg-indigo-700"
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg
+                                   hover:bg-green-700"
                         >
                             View
                         </button>
@@ -303,7 +303,7 @@
         <div class="max-w-7xl mx-auto px-6 py-10 text-center">
 
             <p class="text-2xl font-bold text-white">
-                ShopSphere
+                FreshBasket
             </p>
 
             <p class="mt-3 text-sm">
@@ -311,7 +311,7 @@
             </p>
 
             <p class="mt-6 text-sm text-gray-500">
-                © {{ date('Y') }} ShopSphere. All rights reserved.
+                © {{ date('Y') }} FreshBasket. All rights reserved.
             </p>
 
         </div>
